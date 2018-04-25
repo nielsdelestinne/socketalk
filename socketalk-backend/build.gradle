@@ -1,6 +1,10 @@
 apply plugin: 'org.springframework.boot'
 
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-websocket'
+}
+
+jar {
+    baseName = 'gs-messaging-stomp-websocket-socketalk'
+    version =  '0.1.0'
 }
