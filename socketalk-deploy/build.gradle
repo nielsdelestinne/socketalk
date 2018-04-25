@@ -1,0 +1,12 @@
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    compile project(":socketalk-backend")
+    compile project(":socketalk-frontend")
+    compile 'org.springframework.boot:spring-boot-starter'
+}
+
+jar {
+    baseName = 'gs-messaging-stomp-websocket-socketalk'
+    version =  '0.1.0'
+}

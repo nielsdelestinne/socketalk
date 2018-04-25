@@ -2,3 +2,4 @@ rootProject.name = 'socketalk'
 
 include 'socketalk-backend'
 include 'socketalk-frontend'
+include 'socketalk-deploy'
