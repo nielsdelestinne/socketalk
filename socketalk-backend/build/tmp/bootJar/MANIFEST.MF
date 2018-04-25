@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Start-Class: be.nielsdelestinne.socketalk.SocketalkApplication
-Main-Class: org.springframework.boot.loader.JarLauncher
-
