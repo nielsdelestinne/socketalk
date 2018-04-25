@@ -1,6 +1,6 @@
 # Socketalk
 
-[Socketalk](socketalk.png)
+![Socketalk](socketalk.png)
 
 A Spring Websocket chat-app
 
