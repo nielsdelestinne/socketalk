@@ -1,7 +1,10 @@
 .gradle
-/build/
 /target/
 *.class
+*.jar
+*.war
+*.ear
+build
 !gradle/wrapper/gradle-wrapper.jar
 
 ### STS ###
