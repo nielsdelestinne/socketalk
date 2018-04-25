@@ -1,4 +1,4 @@
-package be.nielsdelestinne.socketalk.greetings.messages.outgoing;
+package be.nielsdelestinne.socketalk.api.connections;
 
 public class GreetingMessage {
 

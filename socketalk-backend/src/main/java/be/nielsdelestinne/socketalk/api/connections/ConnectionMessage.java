@@ -1,13 +1,13 @@
-package be.nielsdelestinne.socketalk.greetings.messages.incoming;
+package be.nielsdelestinne.socketalk.api.connections;
 
-public class HelloMessage {
+public class ConnectionMessage {
 
     private String name;
 
-    public HelloMessage() {
+    public ConnectionMessage() {
     }
 
-    public HelloMessage(String name) {
+    public ConnectionMessage(String name) {
         this.name = name;
     }
 
@@ -18,4 +18,5 @@ public class HelloMessage {
     public void setName(String name) {
         this.name = name;
     }
+
 }
