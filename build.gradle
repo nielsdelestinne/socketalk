@@ -30,7 +30,7 @@ subprojects {
         dependencies {
             dependency "org.springframework.boot:spring-boot-starter-websocket:${springBootVersion}"
             dependency "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
-            dependency "org.webjars:webjars-locator-core"
+            dependency "org.webjars:webjars-locator-core:0.35"
             dependency "org.webjars:sockjs-client:1.0.2"
             dependency "org.webjars:stomp-websocket:2.3.3"
             dependency "org.webjars:bootstrap:3.3.7"
