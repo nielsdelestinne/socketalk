@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hello WebSocket</title>
+    <title>Socketalk - A Socket chat-app</title>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/main.css" rel="stylesheet">
     <script src="/webjars/jquery/jquery.min.js"></script>
@@ -15,35 +15,56 @@
     Javascript and reload this page!</h2></noscript>
 <div id="main-content" class="container">
     <div class="row">
-        <div class="col-md-6">
+        <h1 class="display-1">Socketalk
+            <small class="text-muted">A Socket chat-app</small>
+            <button id="disconnect" class="btn btn-warning" type="submit">Disconnect</button>
+        </h1>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">
             <form class="form-inline">
                 <div class="form-group">
-                    <label for="connect">WebSocket connection:</label>
-                    <button id="connect" class="btn btn-default" type="submit">Connect</button>
-                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
-                    </button>
+                    <label for="name-for-connection" id="name-for-connection-label">Your name:</label>
+                    <input type="text" id="name-for-connection" class="form-control" placeholder="Your name here...">
+                    <button id="connect" class="btn btn-success" type="submit">Connect</button>
                 </div>
             </form>
         </div>
-        <div class="col-md-6">
-            <form class="form-inline">
+        <div class="col-md-12">
+            <form>
                 <div class="form-group">
-                    <label for="name">What is your name?</label>
-                    <input type="text" id="name" class="form-control" placeholder="Your name here...">
+                    <label for="message" id="message-label">Type a message: </label>
+                    <textarea class="form-control" id="message"  rows="3"></textarea>
                 </div>
-                <button id="send" class="btn btn-default" type="submit">Send</button>
+                <button id="send" class="btn btn-primary" type="submit">Send</button>
             </form>
         </div>
     </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="connections-overview" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>connections</th>
+                </tr>
+                </thead>
+                <tbody id="connections">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr/>
     <div class="row">
         <div class="col-md-12">
             <table id="conversation" class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Greetings</th>
+                    <th>messages</th>
                 </tr>
                 </thead>
-                <tbody id="greetings">
+                <tbody id="all-messages">
                 </tbody>
             </table>
         </div>
