@@ -1,5 +1,7 @@
 # Socketalk
 
+[Socketalk](socketalk.png)
+
 A Spring Websocket chat-app
 
 ## Usage
@@ -10,6 +12,11 @@ A Spring Websocket chat-app
     2. Navigate to `localhost:8642` with multiple tabs in your browser.
     3. Press the `Connect` button in all tabs
     4. Chat with yourself...
+    
+## TODO's
+- [ ] Refactor the backend (E.g. code duplication, ugly code, redudant operations,...) :see_no_evil:
+- [ ] Diconnecting should also update the list...
+- [ ] Angular frontend    
     
 ## Resources
 - [STOMP Messaging using Spring Websockets](https://spring.io/guides/gs/messaging-stomp-websocket/)
