@@ -14,7 +14,6 @@ A Spring Websocket chat-app
     4. Chat with yourself...
     
 ## TODO's
-- [ ] Diconnecting should also update the list...
 - [ ] Angular frontend    
     
 ## Resources
