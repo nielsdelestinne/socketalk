@@ -14,7 +14,6 @@ A Spring Websocket chat-app
     4. Chat with yourself...
     
 ## TODO's
-- [ ] Refactor the backend (E.g. code duplication, ugly code, redudant operations,...) :see_no_evil:
 - [ ] Diconnecting should also update the list...
 - [ ] Angular frontend    
     
