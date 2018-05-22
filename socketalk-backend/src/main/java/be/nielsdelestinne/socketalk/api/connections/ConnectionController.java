@@ -9,6 +9,7 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
 import static be.nielsdelestinne.socketalk.api.connections.ConnectionInformationMessage.connectionInformationMessage;
+import static be.nielsdelestinne.socketalk.domain.users.User.UserBuilder.user;
 import static java.util.stream.Collectors.toList;
 import static org.springframework.web.util.HtmlUtils.htmlEscape;
 
@@ -22,10 +23,26 @@ public class ConnectionController {
         this.userRepository = userRepository;
     }
 
+    /**
+     * We already added the sessionId to the repository by listening to the sessionConnected event in the following class:
+     * @see be.nielsdelestinne.socketalk.listeners.connections.ConnectionEventHandlers
+     * Why? Because I wanted to use the special session (dis)connect events... :)
+     */
     @MessageMapping("/initial-connection")
     @SendTo("/topic/initial-connection-information")
-    public ConnectionInformationMessage initiallyConnected(@Payload ConnectionMessage connectionMessage, SimpMessageHeaderAccessor headerAccessor) throws Exception {
+    public ConnectionInformationMessage connect(@Payload ConnectionMessage connectionMessage, SimpMessageHeaderAccessor headerAccessor) throws Exception {
         userRepository.addUnique(headerAccessor.getSessionId(), connectionMessage.getName());
+        return createConnectionInformationMessage();
+    }
+
+    @MessageMapping("/disconnection")
+    @SendTo("/topic/disconnect")
+    public ConnectionInformationMessage disconnect(SimpMessageHeaderAccessor headerAccessor) throws Exception {
+        userRepository.remove(user().withSessionId(headerAccessor.getSessionId()).build());
+        return createConnectionInformationMessage();
+    }
+
+    private ConnectionInformationMessage createConnectionInformationMessage() {
         return connectionInformationMessage()
                 .withAmountOfConnectedUsers(userRepository.getSize())
                 .withNamesOfConnectedUsers(userRepository.getAll().stream()

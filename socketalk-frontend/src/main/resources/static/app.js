@@ -35,12 +35,14 @@ function connect() {
         setConnected(true);
         console.log('Connected: ' + frame);
         subsribeToInitialConnectionTopic();
+        subsribeToDisconnectionTopic();
         subsribeToAllMessagesTopic();
         sendInitialConnectMessage();
     });
 }
 
 function disconnect() {
+    stompClient.send("/app/disconnection", {}, {});
     if (stompClient !== null) {
         stompClient.disconnect();
     }
@@ -58,6 +60,12 @@ function sendMessage() {
 
 function subsribeToInitialConnectionTopic() {
     stompClient.subscribe('/topic/initial-connection-information', function (connectionInformation) {
+        showConnections(JSON.parse(connectionInformation.body));
+    });
+}
+
+function subsribeToDisconnectionTopic() {
+    stompClient.subscribe('/topic/disconnect', function (connectionInformation) {
         showConnections(JSON.parse(connectionInformation.body));
     });
 }
@@ -96,7 +104,13 @@ $(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
-    $( "#connect" ).click(function() { connect(); });
-    $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendMessage(); });
+    $("#connect").click(function () {
+        connect();
+    });
+    $("#disconnect").click(function () {
+        disconnect();
+    });
+    $("#send").click(function () {
+        sendMessage();
+    });
 });

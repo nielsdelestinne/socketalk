@@ -7,7 +7,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
-import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 import static be.nielsdelestinne.socketalk.domain.users.User.UserBuilder.user;
 
@@ -25,12 +24,6 @@ public class ConnectionEventHandlers {
     private void onSessionConnectedEvent(SessionConnectedEvent event) {
         StompHeaderAccessor stomHeaderAccessor = StompHeaderAccessor.wrap(event.getMessage());
         userRepository.add(createUserFromStompMessage(stomHeaderAccessor));
-    }
-
-    @EventListener
-    private void onSessionDisconnectEvent(SessionDisconnectEvent event) {
-        StompHeaderAccessor stomHeaderAccessor = StompHeaderAccessor.wrap(event.getMessage());
-        userRepository.remove(createUserFromStompMessage(stomHeaderAccessor));
     }
 
     private User createUserFromStompMessage(StompHeaderAccessor sha) {
