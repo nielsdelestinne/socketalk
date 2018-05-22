@@ -78,12 +78,16 @@ function showConnections(connectionInformation) {
 }
 
 function rerenderAmountOfConnectedUsers(amountOfConnectedUsers) {
-    $("#connections-amount").append(amountOfConnectedUsers);
+    $("#connections-amount")
+        .empty()
+        .append(amountOfConnectedUsers);
 }
 
 function rerenderListOfConnectedUsers(connectionInformation) {
+    $("#connections").empty();
     connectionInformation.namesOfConnectedUsers.forEach(function (nameOfConnectedUser) {
-        $("#connections").append("<tr><td>" + nameOfConnectedUser + "</td></tr>");
+        $("#connections")
+            .append("<tr><td>" + nameOfConnectedUser + "</td></tr>");
     });
 }
 
