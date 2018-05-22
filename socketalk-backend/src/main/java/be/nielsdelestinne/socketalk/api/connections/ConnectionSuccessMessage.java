@@ -1,13 +1,13 @@
 package be.nielsdelestinne.socketalk.api.connections;
 
-public class GreetingMessage {
+public class ConnectionSuccessMessage {
 
     private String content;
 
-    public GreetingMessage() {
+    public ConnectionSuccessMessage() {
     }
 
-    public GreetingMessage(String content) {
+    public ConnectionSuccessMessage(String content) {
         this.content = content;
     }
 

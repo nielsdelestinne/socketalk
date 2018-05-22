@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static be.nielsdelestinne.socketalk.domain.users.User.UserBuilder.user;
 import static java.util.Collections.newSetFromMap;
 
 /**
@@ -26,6 +27,14 @@ public class UserRepository {
         connectedUsers.add(user);
     }
 
+    public void addUnique(String sessionId, String userName) {
+        get(sessionId)
+                .ifPresent(user -> {
+                    remove(user);
+                    add(user().withSessionId(user.getSessionId()).withName(userName).build());
+                });
+    }
+
     public void remove(User user) {
         connectedUsers.remove(user);
     }
@@ -43,5 +52,4 @@ public class UserRepository {
                 .filter(user -> user.getSessionId().equals(sessionId))
                 .findFirst();
     }
-
 }
