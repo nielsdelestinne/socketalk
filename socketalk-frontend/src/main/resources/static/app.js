@@ -11,6 +11,7 @@ function setConnected(connected) {
         $("#send").hide();
         $("#message").hide();
         $("#message-label").hide();
+        $("#connections-amount-title").hide();
     }
     else {
         $("#connect").hide();
@@ -22,6 +23,7 @@ function setConnected(connected) {
         $("#send").show();
         $("#message").show();
         $("#message-label").show();
+        $("#connections-amount-title").show();
     }
     $("#all-messages").html("");
 }
@@ -55,8 +57,8 @@ function sendMessage() {
 }
 
 function subsribeToInitialConnectionTopic() {
-    stompClient.subscribe('/topic/initial-connection-greeting', function (greeting) {
-        showConnections(JSON.parse(greeting.body).content);
+    stompClient.subscribe('/topic/initial-connection-information', function (connectionInformation) {
+        showConnections(JSON.parse(connectionInformation.body));
     });
 }
 
@@ -70,8 +72,19 @@ function showMessages(message) {
     $("#all-messages").append("<tr><td>" + message + "</td></tr>");
 }
 
-function showConnections(connection) {
-    $("#connections").append("<tr><td>" + connection + "</td></tr>");
+function showConnections(connectionInformation) {
+    rerenderListOfConnectedUsers(connectionInformation);
+    rerenderAmountOfConnectedUsers(connectionInformation.amountOfConnectedUsers);
+}
+
+function rerenderAmountOfConnectedUsers(amountOfConnectedUsers) {
+    $("#connections-amount").append(amountOfConnectedUsers);
+}
+
+function rerenderListOfConnectedUsers(connectionInformation) {
+    connectionInformation.namesOfConnectedUsers.forEach(function (nameOfConnectedUser) {
+        $("#connections").append("<tr><td>" + nameOfConnectedUser + "</td></tr>");
+    });
 }
 
 $(function () {

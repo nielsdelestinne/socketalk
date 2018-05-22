@@ -7,7 +7,10 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.util.HtmlUtils;
+
+import static be.nielsdelestinne.socketalk.api.connections.ConnectionInformationMessage.connectionInformationMessage;
+import static java.util.stream.Collectors.toList;
+import static org.springframework.web.util.HtmlUtils.htmlEscape;
 
 @Controller
 public class ConnectionController {
@@ -20,12 +23,14 @@ public class ConnectionController {
     }
 
     @MessageMapping("/initial-connection")
-    @SendTo("/topic/initial-connection-greeting")
-    public ConnectionSuccessMessage initiallyConnected(@Payload ConnectionMessage connectionMessage, SimpMessageHeaderAccessor headerAccessor) throws Exception {
+    @SendTo("/topic/initial-connection-information")
+    public ConnectionInformationMessage initiallyConnected(@Payload ConnectionMessage connectionMessage, SimpMessageHeaderAccessor headerAccessor) throws Exception {
         userRepository.addUnique(headerAccessor.getSessionId(), connectionMessage.getName());
-        return new ConnectionSuccessMessage("Connected: "
-                + HtmlUtils.htmlEscape(connectionMessage.getName())
-                + " (" + userRepository.getSize() + " users connected)");
+        return connectionInformationMessage()
+                .withAmountOfConnectedUsers(userRepository.getSize())
+                .withNamesOfConnectedUsers(userRepository.getAll().stream()
+                        .map(user -> htmlEscape(user.getName()))
+                        .collect(toList()));
     }
 
 }
